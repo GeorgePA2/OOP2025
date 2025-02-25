@@ -1,0 +1,25 @@
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+void covertstringtoint(char s, int&converts) {
+	for (int i = 0; i < strlen(s); i++) {
+		coverts = coverts * 10 + s[i] - '0';
+	}
+}
+int main() {
+	FILE* fila = fopen_s(&, "in.txt", "r");
+	int numaractual, suma = 0;
+	if (fila == NULL) {
+		printf("EROARE! FISIERUL ESTE GOL!");
+	}
+	else {
+		char numar[256];
+		while (fgets(numar, 200, fila)) {
+			numaractual = 0;
+			covertstringtoint(numar, numaractual);
+			suma = suma + numaractual;
+		}
+	}
+	return 0;
+}
