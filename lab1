@@ -1,0 +1,8 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+
+cout<<"primul lab de oop"<<endl;
+return 0;
+}
