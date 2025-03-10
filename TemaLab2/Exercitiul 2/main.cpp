@@ -13,7 +13,7 @@ int main() {
 	q.SetHist(4.5);
 	q.SetMath(5.6);
 	p.SetNume(Gheorghe);
-	printf("Numele studentului este: %s", p.getNume());
+	printf("Numele studentului este: %s \n", p.getNume());
 	p.SetEng(7.5);
 	printf("Nota studentului la engleza este: %F \n", p.GetNotaEng());
 	p.SetHist(8.9);
@@ -22,8 +22,11 @@ int main() {
 	printf("Nota studentului la matematica este: %f \n", p.getNotaMath());
 	printf("Media studentului este : % f \n", p.AVG());
 
-	printf("%f \n", comparaStudenti(p, q));
-	printf("%f, \n", comparaAVG(p, q));
+	printf("Compara nume: %d \n", comparaStudenti(p, q));
+	printf("Compara mate: %d \n", comparaMath(p, q));
+	printf("Compara istorie: %d, \n", comparaHist(p, q));
+	printf("Compara engleza: %d \n", comparaEng(p, q));
+	printf("Compara medie: %d \n", comparaAVG(p, q));
 
 	return 0;
 }

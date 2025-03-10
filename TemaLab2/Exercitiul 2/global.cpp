@@ -14,7 +14,7 @@ int comparaStudenti(Studentie S1, Studentie S2) {
 	}
 }
 
-float comparaMath(Studentie S1, Studentie S2) {
+int comparaMath(Studentie S1, Studentie S2) {
 	if (S1.getNotaMath() < S2.getNotaMath()) {
 		return -1;
 	}
@@ -25,7 +25,7 @@ float comparaMath(Studentie S1, Studentie S2) {
 		return 1;
 	}
 }
-float comparaHist(Studentie S1, Studentie S2) {
+int comparaHist(Studentie S1, Studentie S2) {
 	if (S1.GetNotaHist() < S2.GetNotaHist()) {
 		return -1;
 	}
@@ -37,7 +37,7 @@ float comparaHist(Studentie S1, Studentie S2) {
 	}
 }
 
-float comparaEng(Studentie S1, Studentie S2) {
+int comparaEng(Studentie S1, Studentie S2) {
 	if (S1.GetNotaEng() < S2.GetNotaEng()) {
 		return -1;
 	}
@@ -49,7 +49,7 @@ float comparaEng(Studentie S1, Studentie S2) {
 	}
 }
 
-float comparaAVG(Studentie S1, Studentie S2) {
+int comparaAVG(Studentie S1, Studentie S2) {
 	if (S1.AVG() < S2.AVG()) {
 		return -1;
 	}
