@@ -15,7 +15,8 @@ int main() {
 	c.Print();
 	c.Clear();
 	printf("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \n");
-	c.DrawRect(10, 5, 3, 2, 'p');
+	c.DrawLine(0, 1, 6, 4, 'k');
+	c.DrawLine(4, 3, 5, 10, 'r');
 	c.Print();
 
 	return 0;
