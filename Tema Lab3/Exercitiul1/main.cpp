@@ -14,6 +14,6 @@ int main() {
 	printf("2.5*8.4=%d \n", m.Mul(2.5, 8.4));
 	printf("2.5*8.4*4.3=%d \n", m.Mul(2.5, 8.4, 4.3));
 	printf("Suma numerelor 1, 2, 3, 4, 5 este %d \n", m.Add(5, 1, 2, 3, 4, 5));
-	printf("OOP + 2024 = %c \n", m.Add("", ""));
+	printf("2023 + 2024 = %c \n", m.Add("2023", "2024"));
 	return 0;
 }
