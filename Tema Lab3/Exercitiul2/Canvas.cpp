@@ -1,17 +1,16 @@
 #include "Canvas.h"
 #include <iostream>
 Canvas::Canvas(int width, int height) : width(width), height(height) {
-	this->canvas = new char*[width];
-	for (int i = 0; i < width; i++) {
-		this->canvas[i] = new char[height];
+	this->canvas = new char*[height];
+	for (int i = 0; i < height; i++) {
+		this->canvas[i] = new char[width];
 	}
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j <= height; j++) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j <= width; j++) {
 			this->canvas[i][j] = ' ';
 		}
 	}
 }
-
 void Canvas::SetPoint(int x, int y, char ch) {
 	this->canvas[x][y] = ch;
 }
@@ -48,15 +47,15 @@ void Canvas::FillRect(int left, int top, int right, int bottom, char ch) {
 		top = bottom;
 		bottom = t;
 	}
-	for (int i = top + 1; i < bottom; i++) {
-		for (int j = left + 1; j < right; j++) {
+	for (int i = top; i <= bottom; i++) {
+		for (int j = left; j <= right; j++) {
 			this->canvas[i][j] = ch;
 		}
 	}
 }
 void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch) {
 	if (abs(y1 - y2) < abs(x1 - x2)) {
-		printf("realizam cazul 1 \n");
+		//printf("realizam cazul 1 \n");
 		if (x1 > x2) {
 			int t = x1;
 			x1 = x2;
@@ -84,7 +83,7 @@ void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch) {
 		}
 	}
 	else {
-		printf("realizam cazul 2 \n");
+		//printf("realizam cazul 2 \n");
 		if (y1 > y2) {
 			int t = y1;
 			y1 = y2;
@@ -118,21 +117,68 @@ void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch) {
 	}
 	}
 
-void DrawlineH(int x1, int y1, int x2, int y2, char ch) {
+void Canvas::DrawCircle(int x, int y, int ray, char ch) {
+	int dx = 0;
+	int dy = ray;
+	int d = 1 - ray;
 
+	while (dx <= dy) {
+		SetPoint(x + dx, y + dy, ch);
+		SetPoint(x - dx, y + dy, ch);
+		SetPoint(x + dx, y - dy, ch);
+		SetPoint(x - dx, y - dy, ch);
+		SetPoint(x + dy, y + dx, ch);
+		SetPoint(x - dy, y + dx, ch);
+		SetPoint(x + dy, y - dx, ch);
+		SetPoint(x - dy, y - dx, ch);
+
+		if (d < 0) {
+			d += 2 * dx + 3;
+		}
+		else {
+			d += 2 * (dx - dy) + 5;
+			dy--;
+		}
+		dx++;
+	}
 }
+//void Canvas::FillCircle(int x, int y, int ray, char ch) {
+//		int dx = 0;
+//		int dy = ray;
+//		int d = 1 - ray;
+//	
+//		while (dx <= dy) {
+//			SetPoint(x + dx, y + dy, ch);
+//			SetPoint(x - dx, y + dy, ch);
+//			SetPoint(x + dx, y - dy, ch);
+//			SetPoint(x - dx, y - dy, ch);
+//			SetPoint(x + dy, y + dx, ch);
+//			SetPoint(x - dy, y + dx, ch);
+//			SetPoint(x + dy, y - dx, ch);
+//			SetPoint(x - dy, y - dx, ch);
+//	
+//			if (d < 0) {
+//				d += 2 * dx + 3;
+//			}
+//			else {
+//				d += 2 * (dx - dy) + 5;
+//				dy--;
+//			}
+//			dx++;
+//		}
+//	}
 
 void Canvas::Print() {
-	for (int i = 0; i < this->width; i++) {
-		for (int j = 0; j < this->height; j++) {
-			printf("%c", this->canvas[i][j]);
+	for (int i = 0; i < this->height; i++) {
+		for (int j = 0; j < this->width; j++) {
+			printf("%c ", this->canvas[i][j]);
 		}
 		printf("\n");
 	}
 }
 void Canvas::Clear() {
-	for (int i = 0; i < this->width; i++) {
-		for (int j = 0; j < this->height; j++) {
+	for (int i = 0; i < this->height; i++) {
+		for (int j = 0; j < this->width; j++) {
 			this->canvas[i][j] = ' ';
 		}
 	}
