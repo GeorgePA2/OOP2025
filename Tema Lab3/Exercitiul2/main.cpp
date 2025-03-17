@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-	Canvas c(15, 20);
+	Canvas c(30, 30);
 	c.SetPoint(0, 0, '[');
 	c.SetPoint(0, 1, ']');
 	c.SetPoint(1, 0, 'e');
@@ -12,6 +12,9 @@ int main() {
 	c.SetPoint(10, 13, 'e');
 	c.DrawRect(3, 6, 10, 10, '0');
 	c.FillRect(3, 2, 10, 5, '4');
+	c.FillCircle(15, 15, 6, '4');
+	c.FillCircle(15, 15, 4, ' ');
+	c.DrawLine(0, 20, 20, 26, '-');
 	c.Print();
 	c.Clear();
 	printf("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \n");

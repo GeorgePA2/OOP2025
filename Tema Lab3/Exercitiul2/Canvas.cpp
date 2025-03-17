@@ -119,10 +119,17 @@ void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch) {
 
 void Canvas::DrawCircle(int x, int y, int ray, char ch) {
 	int dx = 0;
-	int dy = ray;
-	int d = 1 - ray;
+	int dy = -ray;
+	int d = -ray;
 
-	while (dx <= dy) {
+	while (dx <= -dy) {
+		if (d > 0) {
+			dy++;
+			d += 2 * (dx + dy) + 1;
+		}
+		else {
+			d += 2 * dx + 1;
+		}
 		SetPoint(x + dx, y + dy, ch);
 		SetPoint(x - dx, y + dy, ch);
 		SetPoint(x + dx, y - dy, ch);
@@ -132,41 +139,40 @@ void Canvas::DrawCircle(int x, int y, int ray, char ch) {
 		SetPoint(x + dy, y - dx, ch);
 		SetPoint(x - dy, y - dx, ch);
 
-		if (d < 0) {
-			d += 2 * dx + 3;
-		}
-		else {
-			d += 2 * (dx - dy) + 5;
-			dy--;
-		}
 		dx++;
 	}
 }
-//void Canvas::FillCircle(int x, int y, int ray, char ch) {
-//		int dx = 0;
-//		int dy = ray;
-//		int d = 1 - ray;
-//	
-//		while (dx <= dy) {
-//			SetPoint(x + dx, y + dy, ch);
-//			SetPoint(x - dx, y + dy, ch);
-//			SetPoint(x + dx, y - dy, ch);
-//			SetPoint(x - dx, y - dy, ch);
-//			SetPoint(x + dy, y + dx, ch);
-//			SetPoint(x - dy, y + dx, ch);
-//			SetPoint(x + dy, y - dx, ch);
-//			SetPoint(x - dy, y - dx, ch);
-//	
-//			if (d < 0) {
-//				d += 2 * dx + 3;
-//			}
-//			else {
-//				d += 2 * (dx - dy) + 5;
-//				dy--;
-//			}
-//			dx++;
-//		}
-//	}
+void Canvas::FillCircle(int x, int y, int ray, char ch) {
+	int dx = 0;
+	int dy = -ray;
+	int d = -ray;
+
+	while (dx <= -dy) {
+		if (d > 0) {
+			dy++;
+			d += 2 * (dx + dy) + 1;
+		}
+		else {
+			d += 2 * dx + 1;
+		}
+		SetPoint(x + dx, y + dy, ch);
+		SetPoint(x - dx, y + dy, ch);
+
+		SetPoint(x + dx, y - dy, ch);
+		SetPoint(x - dx, y - dy, ch);
+
+		SetPoint(x + dy, y + dx, ch);
+		SetPoint(x - dy, y + dx, ch);
+		SetPoint(x + dy, y - dx, ch);
+		SetPoint(x - dy, y - dx, ch);
+		for (int i = y + dy; i < y - dy; i++) {
+			SetPoint(x + dx, i, ch);
+			SetPoint(x - dx, i, ch);
+		}
+
+		dx++;
+	}
+}
 
 void Canvas::Print() {
 	for (int i = 0; i < this->height; i++) {
