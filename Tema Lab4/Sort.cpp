@@ -2,22 +2,35 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <stdarg.h>
 #include <iostream>
 
-Sort::Sort(int minimum, int maximum, int nr_elemente) : minimum(minimum), maximum(maximum), nr_elemente(nr_elemente) {
+Sort::Sort(int minimum, int maximum, int nr_elemente) : nr_elemente(nr_elemente) {
 	this->vector = new int[nr_elemente];
 	srand(time(0));
 	for (int i = 0; i < nr_elemente; i++) {
 		this->vector[i] = minimum + rand() % (maximum - minimum);
 	}
 }
-Sort::Sort(int nr, int array[]) {
-	this->nr_elemente = nr;
+Sort::Sort(): vector(new int[4] { 24, 12, 45, 5 }) {
+	this->nr_elemente = 4;
+}
+Sort::Sort(int nr, int array[]) : nr_elemente(nr) {
 	this->vector = new int[nr_elemente];
 	for (int i = 0; i < nr_elemente; i++) {
 		this->vector[i] = array[i];
 	}
 }
+Sort::Sort(int nr, ...): nr_elemente(nr) {
+	this->vector = new int[nr_elemente+1];
+		va_list numbers;
+		va_start(numbers, nr);
+		for (int i = 0; i < nr; i++) {
+			vector[i] = va_arg(numbers, int);
+		}
+		va_end(numbers);
+
+	}
 Sort::Sort(const char* sir) {
 	int i = 0, nr = 0, numar;
 	if (sir != nullptr) {
