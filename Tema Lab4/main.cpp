@@ -21,8 +21,9 @@ int main() {
 	random.InsertSort(true);
 	printf("Elementele din random sortate prin InsertSort sunt: ");
 	random.Print();
-	s.InsertSort();
-	printf("Elementele din s sortate descrescator prin InsertSort sunt: ");
+	s.Print();
+	s.QuickSort();
+	printf("Elementele din s sortate descrescator prin QuickSort sunt: ");
 	s.Print();
 	a.BubbleSort(false);
 	printf("Elementele din a sortate prin BubbleSort descrescator sunt: ");

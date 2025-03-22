@@ -80,8 +80,40 @@ void Sort::InsertSort(bool ascendent) {
 			}
 		}
 }
+void Quicksort(int v[], int st, int dr)
+{
+	if (st < dr)
+	{
+		int m = (st + dr) / 2;
+		int aux = v[st];
+		v[st] = v[m];
+		v[m] = aux;
+		int i = st, j = dr, d = 0;
+		while (i < j)
+		{
+			if (v[i] > v[j])
+			{
+				aux = v[i];
+				v[i] = v[j];
+				v[j] = aux;
+				d = 1 - d;
+			}
+			i += d;
+			j -= 1 - d;
+		}
+		Quicksort(v, st, i - 1);
+		Quicksort(v, i + 1, dr);
+	}
+}
 void Sort::QuickSort(bool ascendent) {
-
+	Quicksort(this->vector, 0, nr_elemente-1);
+	if (ascendent == false) {
+		for (int i = 0; i < this->nr_elemente / 2; i++) {
+			int t = vector[i];
+			vector[i] = vector[nr_elemente - i - 1];
+			vector[nr_elemente - i - 1] = t;
+		}
+	}
 }
 void Sort::BubbleSort(bool ascendent) {
 	bool swapped;
