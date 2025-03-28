@@ -12,16 +12,21 @@ int main() {
 	Number n3("15", 10);
 	Number n4("20", 10);
 	Number n2 = n1 + n3 - n4;
+	n2.Print();
 	f = 14;
+	Number n5 = 13;
 	f.Print();
 	if (f > baza10) {
 		printf("fuckshitpiss \n");
 	}
-	else {
+	if (f < baza10) {
 		printf("L bozo \n");
 	}
 	baza10.SwitchBase(2);
 	baza10.Print();
+	Number e1("16", 10);
+	e1 += n1;
+	e1.Print();
 	e.Print();
 	f.Print();
 	f.SwitchBase(16);

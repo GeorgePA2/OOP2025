@@ -36,6 +36,12 @@ Number::Number(const char* value, int base) {
 
 	}
 }
+Number::Number(const int& num) {
+	this->numar = num;
+	this->base = 10;
+	SwitchBase(10);
+}
+Number::Number() : numar(0), base(10){}
 Number::Number(const Number& d) {
 	this->numar = d.numar;
 	this->base = d.base;
@@ -48,42 +54,80 @@ Number& Number::operator=(int num) {
 	SwitchBase(this->base);
 	return (*this);
 }
+Number& Number::operator+=(Number n) {
+	this->numar += n.numar;
+	int based = this->base;
+	if (based < n.base) {
+		based = n.base;
+	}
+	SwitchBase(based);
+	return (*this);
+}
+Number& Number::operator-=(Number n) {
+	this->numar -= n.numar;
+	int based = this->base;
+	if (based < n.base) {
+		based = n.base;
+	}
+	SwitchBase(based);
+	return (*this);
+}
+Number& Number::operator*=(Number n) {
+	this->numar *= n.numar;
+	int based = this->base;
+	if (based < n.base) {
+		based = n.base;
+	}
+	SwitchBase(based);
+	return (*this);
+}
+Number& Number::operator/=(Number n) {
+	this->numar *= n.numar;
+	int based = this->base;
+	if (based < n.base) {
+		based = n.base;
+	}
+	SwitchBase(based);
+	return (*this);
+}
 Number operator+(const Number& n1, const Number& n2) {
 	int newbase = n1.base;
 	 if (n1.base < n2.base) {
 		 newbase = n2.base;
 	}
 	 int value = n1.numar + n2.numar;
-	 int value1 = value;
-	 int i = 0;
-	 while (value1 > 0) {
-		 i++;
-		 value1 /= newbase;
-	 }
-	 char* temp = new char[i + 1];
-	 int j = 0;
-	 while (j < i) {
-		 /*printf("restul impartirii este : %d \n", numero2 % 10);*/
-		 if (value % newbase < 10) {
-			 temp[j] = value % newbase + '0';
-		 }
-		 else {
-			 temp[j] = value % newbase % 10 + 'A';
-		 }
-		 value /= newbase;
-		 j++;
-	 }
-	 temp[i] = '\0';
-	 for (j = 0; j < i / 2; j++) {
-		 char t = temp[j];
-		 temp[j] = temp[i - j - 1];
-		 temp[i - j - 1] = t;
-	 }
+	 //int value1 = value;
+	 //int i = 0;
+	 //while (value1 > 0) {
+		// i++;
+		// value1 /= newbase;
+	 //}
+	 //char* temp = new char[i + 1];
+	 //int j = 0;
+	 //while (j < i) {
+		// /*printf("restul impartirii este : %d \n", numero2 % 10);*/
+		// if (value % newbase < 10) {
+		//	 temp[j] = value % newbase + '0';
+		// }
+		// else {
+		//	 temp[j] = value % newbase % 10 + 'A';
+		// }
+		// value /= newbase;
+		// j++;
+	 //}
+	 //temp[i] = '\0';
+	 //for (j = 0; j < i / 2; j++) {
+		// char t = temp[j];
+		// temp[j] = temp[i - j - 1];
+		// temp[i - j - 1] = t;
+	 //}
 
-	 Number result(temp, newbase);
+	 Number result;
+	 result = value;
+	 result.SwitchBase(newbase);
 
-	 delete[] temp;
-	 temp = NULL;
+/*	 delete[] temp;
+	 temp = NULL*/;
 
 	 return result;
 
@@ -135,36 +179,10 @@ Number operator-(const Number& n1, const Number& n2) {
 		newbase = n2.base;
 	}
 	int value = n1.numar - n2.numar;
-	int value1 = value;
-	int i = 0;
-	while (value1 > 0) {
-		i++;
-		value1 /= newbase;
-	}
-	char* temp = new char[i + 1];
-	int j = 0;
-	while (j < i) {
-		/*printf("restul impartirii este : %d \n", numero2 % 10);*/
-		if (value % newbase < 10) {
-			temp[j] = value % newbase + '0';
-		}
-		else {
-			temp[j] = value % newbase % 10 + 'A';
-		}
-		value /= newbase;
-		j++;
-	}
-	temp[i] = '\0';
-	for (j = 0; j < i / 2; j++) {
-		char t = temp[j];
-		temp[j] = temp[i - j - 1];
-		temp[i - j - 1] = t;
-	}
 
-	Number result(temp, newbase);
-
-	delete[] temp;
-	temp = NULL;
+	Number result;
+	result = value;
+	result.SwitchBase(newbase);
 
 	return result;
 
