@@ -13,7 +13,7 @@ Number::Number(const char* value, int base) {
 			//printf("value[i] este: %c \n", value[i]);
 			if (value[i] <= '9') {
 				this->numar = this->numar * base + (value[i] - '0');
-				int r = value[i] - '0';
+				/*int r = value[i] - '0';*/
 				//printf("progress per cifra: %c \n", r);
 			}
 			else {
@@ -36,10 +36,52 @@ Number::Number(const char* value, int base) {
 
 	}
 }
+int Number::operator[](int index) {
+	if (index<0 || index>digits) {
+		printf("EROARE! INDEXUL NU ESTE CORESPUNZATOR!!!");
+		return -1;
+	}
+	return number[index];
+}
 Number::Number(const int& num) {
 	this->numar = num;
 	this->base = 10;
 	SwitchBase(10);
+}
+Number::Number(const char* num) {
+	int i = 0;
+	int baza = 2;
+	if (number != NULL) {
+		baza = this->base;
+	}
+	while (num[i] != '\0') {
+		if (num[i]<= '9') {
+			/*this->numar = this->numar * base + (value[i] - '0');*/
+			if (num[i] - '0' > baza - 1) {
+				baza = num[i] - '0' + 1;
+				printf("baza este: %d \n", baza);
+			}
+		}
+		if (num[i]>='A') {
+			if (num[i] - 'A' + 10 > baza - 1) {
+				baza = num[i] - 'A' + 11;
+				printf("baza este: %d \n", baza);
+			}
+		}
+		i++;
+	}
+	this->base = baza;
+	this->digits = i;
+	printf("nr de digits este: %d \n", i);
+	printf("baza este: %d \n", baza);
+	Number result(num, this->base);
+	printf("success! \n");
+	
+	delete[] number;
+	number = new char[i + 1];
+
+	memcpy(this->number, num, i + 1);
+	this->numar = result.numar;
 }
 Number::Number() : numar(0), base(10){}
 Number::Number(const Number& d) {
@@ -47,10 +89,54 @@ Number::Number(const Number& d) {
 	this->base = d.base;
 	this->digits = d.digits;
 	this->number = new char[this->digits + 1];
-	memcpy(this->number, d.number, this->digits+1);
+	if (d.numar != NULL) {
+		memcpy(this->number, d.number, this->digits + 1);
+	}
 }
 Number& Number::operator=(int num) {
 	this->numar = num;
+	SwitchBase(this->base);
+	return (*this);
+}
+Number& Number::operator=(const char* num) {
+	int i = 0;
+	int baza = 2;
+	if (number != NULL) {
+		baza = this->base;
+	}
+	while (num[i] != '\0') {
+		if (num[i] <= '9') {
+			/*this->numar = this->numar * base + (value[i] - '0');*/
+			if (num[i] - '0' > baza - 1) {
+				baza = num[i] - '0' + 1;
+				printf("baza este: %d \n", baza);
+			}
+		}
+		if (num[i] >= 'A') {
+			if (num[i] - 'A' + 10 > baza - 1) {
+				baza = num[i] - 'A' + 11;
+				printf("baza este: %d \n", baza);
+			}
+		}
+		i++;
+	}
+	this->base = baza;
+	this->digits = i;
+	printf("nr de digits este: %d \n", i);
+	printf("baza este: %d \n", baza);
+	Number result(num, this->base);
+	printf("success! \n");
+
+	delete[] number;
+	number = new char[i + 1];
+
+	memcpy(this->number, num, i + 1);
+	this->numar = result.numar;
+	return (*this);
+}
+Number& Number::operator=(Number num) {
+	this->numar = num.numar;
+	this->numar = num.base;
 	SwitchBase(this->base);
 	return (*this);
 }
@@ -88,6 +174,25 @@ Number& Number::operator/=(Number n) {
 		based = n.base;
 	}
 	SwitchBase(based);
+	return (*this);
+}
+Number& Number::operator--() {
+	if (digits == 0) {
+		return(*this);
+	}
+	digits--;
+	for (int i = 1; i <= digits; i++) {
+		number[i - 1] = number[i];
+	}
+	number[digits] = '\0';
+	return (*this);
+}
+Number& Number::operator--(int) {
+	if (digits == 0) {
+		return(*this);
+	}
+	digits--;
+	number[digits] = '\0';
 	return (*this);
 }
 Number operator+(const Number& n1, const Number& n2) {
@@ -233,13 +338,7 @@ void Number::SwitchBase(int newBase) {
 }
 
 
-Number::~Number() {
-	if (number != nullptr) {
-		delete[] number;
-		number = nullptr;
-	}
-	/*printf("destructorul gigel /n");*/
-}
+
 void Number::Print() {
 	printf("Numarul este: %s \n", this->number);
 }
@@ -248,4 +347,11 @@ int Number::GetDigitsCount() {
 }
 int Number::GetBase() {
 	return this->base;
+}
+Number::~Number() {
+	if (number != nullptr) {
+		delete[] number;
+		number = nullptr;
+	}
+	//printf("destructorul gigel \n");
 }
