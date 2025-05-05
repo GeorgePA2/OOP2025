@@ -20,6 +20,9 @@ int main()
     }
     m[20] = "result";
     m.Set(10, "zece");
+    const char* basescu = "Basescu";
+    m.Get(10, basescu);
+    printf("Nume: %s \n", basescu);
     if (m.Delete(40)) {
         for (auto [key, value, index] : m)
         {
@@ -28,7 +31,7 @@ int main()
     }
     //m.Clear();
     printf("Exista %d elemente in mapa \n", m.Count());
+    //m.Includes(m2);
     return 0;
-   // m.Includes(m2);
    
 }

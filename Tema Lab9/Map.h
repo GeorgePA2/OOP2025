@@ -27,8 +27,10 @@ public:
 			head = head->next;
 			delete temp;
 		}
+
 	}
 	Value& operator[](Key index) {
+		//index = index * 2;
 		Mapare* temp = head;
 		while (temp != nullptr) {
 			if (temp->cheie == index) {
@@ -62,23 +64,29 @@ public:
 			temp = temp->next;
 		}
 	}
+
 	bool Get(const Key& key, Value& value) {
 		Mapare* temp = head;
 		bool ok = true;
 		while ((temp != nullptr) && ok) {
 			if (temp->cheie == key) {
-				Key temp_key;
-				int nr_cif=0;
-				while (temp_key > 0) {
-					temp_key /= 10;
-					nr_cif++;
-				}
-
-				temp->val = value;
+				value = temp->val;
 				ok = false;
 			}
 			temp = temp->next;
 		}
+		return !ok;
+	}
+	Value Get_Value(Key key) {
+		Mapare* temp = head;
+		bool ok = true;
+		while (temp != nullptr) {
+			if (temp->cheie == key) {
+				return temp->value;
+			}
+			temp = temp->next;
+		}
+		return nullptr;
 	}
 	int Count() {
 		return idx;
@@ -104,6 +112,9 @@ public:
 		}
 		return(!ok);
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
 	class Iterator {
 	private:
 		Mapare* poz;
@@ -140,20 +151,23 @@ public:
 		return Iterator(nullptr);
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////
 	//bool Includes(const Map<Key, Value>& map) {
-	//	Mapare* newTemp = head;
-	//	bool ok = false;
-	//	while (newTemp != nullptr) {
-	//		ok = false;
-	//		for (auto [key, value, index] : map)
-	//		{
-	//			if (key == newTemp->cheie) {
+	//	Mapare* newMap1 = map.head;
+	//	while (newMap1 != nullptr) {
+	//		Mapare* newTemp = head;
+	//		bool ok = false;
+	//		Key cheita = newMap1->cheie;
+	//		while (newTemp != nullptr) {
+	//			if (newTemp.Get_Value(cheita)==newMap1.Get_Value(cheita)) {
 	//				ok = true;
 	//			}
+	//			newTemp = newTemp->next;
 	//		}
 	//		if (ok == false) {
 	//			return false;
 	//		}
+	//		newMap1 = newMap1.next;
 	//	}
 	//	return true;
 	//}
