@@ -11,9 +11,7 @@ int main()
     m[10] = "C++";
     m[20] = "test";
     m[30] = "Poo";
-    m2[10] = "C++";
-    m2[20] = "banna";
-    m2[30] = "fff";
+    m2[10] = "zece";
     for (auto [key, value, index] : m)
     {
         printf("Index:%d, Key=%d, Value=%s\n", index, key, value);
@@ -31,7 +29,12 @@ int main()
     }
     //m.Clear();
     printf("Exista %d elemente in mapa \n", m.Count());
-    //m.Includes(m2);
+    if (m.Includes(m2)) {
+        for (auto [key, value, index] : m2)
+        {
+            printf("Index:%d, Key=%d, Value=%s\n", index, key, value);
+        }
+    }
     return 0;
    
 }

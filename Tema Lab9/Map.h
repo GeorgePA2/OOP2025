@@ -152,23 +152,26 @@ public:
 	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-	//bool Includes(const Map<Key, Value>& map) {
-	//	Mapare* newMap1 = map.head;
-	//	while (newMap1 != nullptr) {
-	//		Mapare* newTemp = head;
-	//		bool ok = false;
-	//		Key cheita = newMap1->cheie;
-	//		while (newTemp != nullptr) {
-	//			if (newTemp.Get_Value(cheita)==newMap1.Get_Value(cheita)) {
-	//				ok = true;
-	//			}
-	//			newTemp = newTemp->next;
-	//		}
-	//		if (ok == false) {
-	//			return false;
-	//		}
-	//		newMap1 = newMap1.next;
-	//	}
-	//	return true;
-	//}
+
+	bool Includes(const Map<Key, Value>& map) {
+		Mapare* newMap1 = map.head;
+		while (newMap1 != nullptr) {
+			Mapare* newTemp = head;
+			bool ok = false;
+			while (newTemp != nullptr) {
+				if (newTemp->cheie == newMap1->cheie && newTemp->val == newMap1->val) {
+					ok = true;
+					break;
+				}
+				newTemp = newTemp->next;
+			}
+			if (!ok) {
+				return false;
+			}
+			newMap1 = newMap1->next;
+		}
+		return true;
+	}
+
+
 };
